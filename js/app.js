@@ -87,7 +87,7 @@
       .map(
         (item) => `
         <button class="card" type="button" data-id="${item.id}">
-          <img src="${item.image}" alt="${item.name}" loading="lazy" referrerpolicy="no-referrer" />
+          <img src="${item.image}" alt="${item.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.removeAttribute('src')" />
           <div class="card-body">
             <div class="type">${item.type} · ${item.civilization}</div>
             <h3>${item.name}</h3>
@@ -104,6 +104,7 @@
     const item = artifacts.find((entry) => entry.id === id);
     if (!item) return;
     const image = document.getElementById("sheet-image");
+    image.onerror = () => image.removeAttribute("src");
     image.src = item.image;
     image.alt = item.name;
     document.getElementById("sheet-type").textContent = item.type;
@@ -138,6 +139,7 @@
   }
 
   function setHero(item) {
+    els.heroImage.onerror = () => els.heroImage.removeAttribute("src");
     els.heroImage.src = item.image;
     els.heroImage.alt = item.name;
     els.heroName.textContent = item.name;
