@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>寰宇文物馆 · 人人可看的线上数字博物馆</title>
+  <meta name="description" content="公开的世界文物图鉴：按类型浏览青铜、陶瓷、雕塑与绘画，阅读年代、文明、馆藏与小故事。无需登录。" />
+  <link rel="preconnect" href="https://upload.wikimedia.org" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#top">
+      <span class="brand-mark">器</span>
+      <span>
+        <strong>寰宇文物馆</strong>
+        <em>Museum Mundi</em>
+      </span>
+    </a>
+    <nav class="top-nav" aria-label="页面导航">
+      <a href="#atlas">图鉴</a>
+      <a href="#types">门类</a>
+      <a href="#about">关于</a>
+    </nav>
+    <label class="nav-search">
+      <span class="sr-only">搜索文物</span>
+      <input id="search-input" type="search" placeholder="搜索名字、年代、文明、馆藏…" autocomplete="off" />
+    </label>
+    <p class="access-note">公开开放 · 无需登录</p>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">一座不上锁的数字博物馆</p>
+        <h1>把世界的器物，<br />安放在同一盏灯下。</h1>
+        <p class="lede">从商代青铜到尼罗河金面，从宋人长卷到江户浪纹。这里只做一件事：让任何人都能走近一件文物——看它的样子，读它的年代、文明、馆藏，以及一段够用的小故事。</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#atlas">进入展厅</a>
+          <button class="btn ghost" type="button" id="random-btn">随机遇见</button>
+        </div>
+        <dl class="stats">
+          <div>
+            <dt>收录文物</dt>
+            <dd id="stat-count">28</dd>
+          </div>
+          <div>
+            <dt>器物门类</dt>
+            <dd>8</dd>
+          </div>
+          <div>
+            <dt>参观方式</dt>
+            <dd>免费</dd>
+          </div>
+        </dl>
+      </div>
+      <figure class="hero-stage" id="hero-stage">
+        <img id="hero-image" alt="" referrerpolicy="no-referrer" />
+        <figcaption>
+          <span id="hero-kicker">今日展出</span>
+          <strong id="hero-name"></strong>
+          <i id="hero-meta"></i>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="wings" id="types">
+      <div class="section-head">
+        <h2>八个门类</h2>
+        <p>按器物的做成方式走进去。青铜、瓷土、石料、绢素，各是一种文明的手艺。</p>
+      </div>
+      <div class="wing-grid" id="wing-grid"></div>
+    </section>
+
+    <section class="atlas" id="atlas">
+      <div class="atlas-bar">
+        <div>
+          <h2>世界图鉴</h2>
+          <p class="result-line" id="result-line">正在整理展品…</p>
+        </div>
+      </div>
+      <div class="filters" id="filters" role="tablist" aria-label="按文物类型筛选"></div>
+      <div class="gallery" id="gallery"></div>
+      <p class="empty" id="empty" hidden>这座展厅里暂时没有匹配的文物。换个词，或回到“全部”。</p>
+    </section>
+
+    <section class="about" id="about">
+      <div>
+        <p class="eyebrow">产品说明</p>
+        <h2>为路过的人而做，不为登录而做。</h2>
+        <p>文物不该先变成账号墙。这是一间对公众打开的图鉴：看器物、读一段够用的介绍，知道它来自哪个年代、哪一种文明、如今藏在哪座馆里。内容面向家庭、学生和随手想认识一件文物的人。</p>
+      </div>
+      <ul class="principles">
+        <li><strong>看见</strong>每件文物都配有馆藏级照片。</li>
+        <li><strong>读懂</strong>名字、年代、文明、馆藏一眼能找到。</li>
+        <li><strong>开放</strong>任何人可浏览，不设登录与付费。</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>寰宇文物馆 · 公开图鉴。照片来自 Wikimedia Commons，仅供浏览学习。</p>
+    <p>年代与馆藏为通行公开信息的通俗整理，非正式鉴定报告。</p>
+  </footer>
+
+  <div class="overlay" id="overlay" hidden>
+    <article class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-name">
+      <button class="close" type="button" id="close-sheet" aria-label="关闭">关闭</button>
+      <div class="sheet-photo">
+        <img id="sheet-image" alt="" referrerpolicy="no-referrer" />
+      </div>
+      <div class="sheet-body">
+        <p class="sheet-region" id="sheet-type"></p>
+        <h3 id="sheet-name"></h3>
+        <ul class="meta" id="sheet-meta"></ul>
+        <p class="story-label">小故事</p>
+        <p class="story" id="sheet-story"></p>
+      </div>
+    </article>
+  </div>
+
+  <script src="js/artifacts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
