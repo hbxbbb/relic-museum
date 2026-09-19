@@ -22,6 +22,7 @@
     overlay: document.getElementById("overlay"),
     close: document.getElementById("close-sheet"),
     random: document.getElementById("random-btn"),
+    more: document.getElementById("load-more"),
     heroImage: document.getElementById("hero-image"),
     heroName: document.getElementById("hero-name"),
     heroMeta: document.getElementById("hero-meta"),
@@ -30,6 +31,8 @@
 
   let type = "全部";
   let query = "";
+  let shown = 24;
+  const PAGE = 24;
 
   const countByType = (name) =>
     artifacts.filter((item) => name === "全部" || item.type === name).length;
@@ -79,7 +82,8 @@
         : `${type}现有 ${list.length} 件`;
 
     els.empty.hidden = list.length > 0;
-    els.gallery.innerHTML = list
+    const visible = list.slice(0, shown);
+    els.gallery.innerHTML = visible
       .map(
         (item) => `
         <button class="card" type="button" data-id="${item.id}">
@@ -93,6 +97,7 @@
         </button>`
       )
       .join("");
+    els.more.hidden = visible.length >= list.length;
   }
 
   function openArtifact(id) {
@@ -123,6 +128,7 @@
 
   function setType(next) {
     type = next;
+    shown = PAGE;
     document.querySelectorAll(".wing").forEach((btn) => {
       btn.classList.toggle("active", btn.dataset.type === next);
     });
@@ -170,6 +176,12 @@
 
   els.search.addEventListener("input", (event) => {
     query = event.target.value;
+    shown = PAGE;
+    renderGallery();
+  });
+
+  els.more.addEventListener("click", () => {
+    shown += PAGE;
     renderGallery();
   });
 
